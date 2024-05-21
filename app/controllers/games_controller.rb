@@ -10,7 +10,7 @@ class GamesController < ApplicationController
     game.user = current_user
     if game.save
       flash[:notice] = "Game created"
-      redirect_to games_show_url(game)
+      redirect_to user_game_url(current_user, game)
     else
       flash[:alert] = "Game could not be created"
       render :new

@@ -9,7 +9,7 @@ RSpec.describe GamesController, type: :controller do
 
   end
   describe "POST #create" do
-    subject { post :create, params: { game: { name: "game1" } } }
+    subject { post :create, params: { user_id: user.id, game: { name: "game1" } } }
     let(:user) { create(:user)}
 
     before do
@@ -34,7 +34,7 @@ RSpec.describe GamesController, type: :controller do
 
       it "redirects to the game show page" do
         subject
-        expect(response).to redirect_to(games_show_url(Game.first))
+        expect(response).to redirect_to(user_game_url(user, Game.first))
       end
     end
   end

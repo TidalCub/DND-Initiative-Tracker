@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'games/index'
-  get 'games/show'
-  get 'games/create'
-  get 'encounter/index'
-  get 'encounter/show'
-  get 'encounter/create'
+  resources :users do
+    resources :games do
+      resources :encounters do
+        resources :creatures
+      end
+    end
+  end
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
