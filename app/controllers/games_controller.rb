@@ -6,5 +6,21 @@ class GamesController < ApplicationController
   end
 
   def create
+    game = Game.new(create_params)
+    game.user = current_user
+    if game.save
+      flash[:notice] = "Game created"
+      redirect_to games_show_url(game)
+    else
+      flash[:alert] = "Game could not be created"
+      render :new
+    end
+
+  end
+
+  private
+
+  def create_params
+    params.require(:game).permit(:name)
   end
 end
