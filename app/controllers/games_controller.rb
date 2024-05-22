@@ -3,11 +3,15 @@ class GamesController < ApplicationController
   
   def index
     @games = current_user.games.all
+    @new_game = Game.new
   end
 
   def show
   end
 
+  def new
+  end
+  
   def create
     game = Game.new(create_params)
     game.user = current_user

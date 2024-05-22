@@ -1,2 +1,11 @@
 @import "bootstrap";
 
+$fancy-font: ALMENDRA;
+
+.display-2{
+  font-family: $fancy-font;
+}
+
+.fancy{
+  font-family: $fancy-font
+}
