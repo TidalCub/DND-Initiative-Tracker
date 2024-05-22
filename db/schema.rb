@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_21_133452) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_22_143702) do
   create_table "creatures", force: :cascade do |t|
     t.string "name"
     t.integer "health"
@@ -19,6 +19,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_133452) do
     t.integer "encounter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "strength"
+    t.integer "dexterity"
+    t.integer "constitution"
+    t.integer "intelligence"
+    t.integer "wisdom"
+    t.integer "charisma"
+    t.string "size"
+    t.string "monster_type"
+    t.string "alignment"
+    t.integer "walking_speed"
+    t.integer "fly_speed"
+    t.integer "swim_speed"
     t.index ["encounter_id"], name: "index_creatures_on_encounter_id"
   end
 
