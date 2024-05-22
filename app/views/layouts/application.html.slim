@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Initiative
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+  body
+  .col-12.bg-dark.p-3.d-flex.gap-4.align-bottom
+    h1.text-light Initiative Tracker
+    .d-flex.flex-column.justify-content-end
+      .mb-2
+        = link_to user_games_path(current_user), class: "align-bottom text-light text-decoration-none" do
+          | Games
+  = yield

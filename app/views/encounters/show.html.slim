@@ -1,4 +1,4 @@
-.display-2.col-12.text-center Encounters
+.display-2.col-12.text-center Encounter
 dialog#newcreature.border-0
   h3 New Creature
   .d-flex.col-12.justify-content-center.gap-2
@@ -22,7 +22,11 @@ button.btn.btn-light onclick="newcreature.showModal()" Add a creature
 .col-12.d-flex.flex-row.justify-content-center.gap-2
   - @encounter.creatures.order(:initiative).each do |creature|
     .bg-light.p-3.rounded.w-25
-      h2.fancy = creature.name
+      .col-12.d-flex.justify-content-between
+        h1 = creature.name
+        = button_to user_game_encounter_creature_url(current_user, @encounter.game, @encounter, creature), method: :delete, class: "dropdown-item"
+          i.fa-solid.fa-xmark
+        
       table.text-center.col-12
         tr
           th HP

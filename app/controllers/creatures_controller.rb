@@ -20,6 +20,13 @@ class CreaturesController < ApplicationController
       redirect_to user_game_encounter_url(current_user, params[:game_id], params[:encounter_id])
     end
   end
+
+  def destroy
+    @creature = Creature.find(params[:id])
+    if @creature.destroy
+      redirect_to user_game_encounter_url(current_user, params[:game_id], params[:encounter_id])
+    end
+  end
   private 
 
   def initiative
