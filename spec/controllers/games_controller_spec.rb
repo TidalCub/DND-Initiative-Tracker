@@ -6,26 +6,38 @@ RSpec.describe GamesController, type: :controller do
     let(:user) { create(:user)}
     let(:game) { create(:game, user: user) }
 
-    before do
-      allow(controller).to receive(:current_user).and_return(user)
-      game
+
+    context "when the user is signed in" do
+      before do
+        sign_in user
+        game
+      end
+  
+      it "assigns @games" do
+        subject
+        expect(assigns(:games)).to match_array(game)
+      end
     end
 
-    it "assigns @games" do
-      subject
-      expect(assigns(:games)).to match_array(game)
+    context "when the user is not signed in" do
+      it "redirects to the sign in page" do
+        subject
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
+    
   end
 
   describe "GET #show" do
 
   end
+
   describe "POST #create" do
     subject { post :create, params: { user_id: user.id, game: { name: "game1" } } }
     let(:user) { create(:user)}
 
     before do
-      allow(controller).to receive(:current_user).and_return(user)
+      sign_in user
     end
 
     context "when the game is valid" do
