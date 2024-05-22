@@ -1,0 +1,13 @@
+.display-2.col-12.text-center Encounters
+dialog#newgame.border-0
+  h1 New Encounters
+  = render 'new_form'
+
+button.btn.btn-light onclick="newgame.showModal()" Create a new encounter
+
+.col-12.d-flex.flex-column
+  - @encounter.each do |encounter|
+    .col-12.p-2
+      = link_to user_game_encounter_url(current_user, @game, encounter)
+        .col-12.bg-light.p-3.rounded.mt-auto
+          h2.fancy = encounter.name

@@ -1,0 +1,7 @@
+= form_with model: @new_encounter, action: "create", url: user_game_encounters_url(current_user, @game) do |f|
+  .form-group
+    = f.label :name, 'Encounter Name'
+    = f.text_field :name , class: 'form-control'
+  .form-group.col-12.d-flex.justify-content-between
+    = button_tag 'Cancle', type: 'button', onclick: 'newgame.close()', class: 'btn btn-secondary mt-2'
+    = f.submit 'Create Game', class: 'btn btn-success mt-2'

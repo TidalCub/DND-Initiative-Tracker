@@ -1,0 +1,20 @@
+.display-2.col-12.text-center Encounters
+dialog#newgame.border-0
+  h1 New Creature
+  = render 'creatures/new_form'
+
+button.btn.btn-light onclick="newgame.showModal()" Add a creature
+
+.col-12.d-flex.flex-row.justify-content-center.gap-2
+  - @encounter.creatures.order(:initiative).each do |creature|
+    .bg-light.p-3.rounded.w-25
+      h2.fancy = creature.name
+      table.text-center.col-12
+        tr
+          th HP
+          th AC
+          th Init
+        tr
+          td = creature.health
+          td = creature.armor_class
+          td = creature.initiative

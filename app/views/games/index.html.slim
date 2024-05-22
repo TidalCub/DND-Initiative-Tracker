@@ -3,11 +3,11 @@ dialog#newgame.border-0
   h1 New game
   = render 'new_form'
 
-button.btn.btn-light onclick="newgame.showModal()" Create a new Game
+button.btn.btn-light onclick="newgame.showModal()" Create a new Game\
 
 .col-12.d-flex.flex-column
   - @games.each do |game|
     .col-12.p-2
-      = link_to user_game_path(current_user, game)
+      = link_to user_game_encounters_url(current_user, game)
         .col-12.bg-light.p-3.rounded.mt-auto
           h2.fancy = game.name

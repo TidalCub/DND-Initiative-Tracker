@@ -1,0 +1,15 @@
+= form_with model: @new_creature, action: "create", url: user_game_encounter_creatures_url(current_user, @encounter.game, @encounter) do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control"
+  .form-group
+    = f.label :health
+    = f.number_field :health, class: "form-control"
+  .form-group
+    = f.label :armor_class
+    = f.number_field :armor_class, class: "form-control"
+  .form-group
+    =f.label :initiative
+    =f.number_field :initiative, class: "form-control"
+  
+  = f.submit "Create", class: "btn btn-primary"
