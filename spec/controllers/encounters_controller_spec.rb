@@ -29,8 +29,24 @@ RSpec.describe EncountersController, type: :controller do
         expect(assigns(:encounter)).to eq([])
       end
     end
+  end
 
-    
+  describe "GET #show" do
+    subject { get :show, params: {user_id: user.id, game_id: game.id, id: encounter.id} }
+    let(:user) { create(:user)}
+    let(:game) { create(:game, user: user) }
+    let(:encounter) { create(:encounter, game: game) }
+    let(:creature) { create(:creature, encounter: encounter) }
+
+    before do
+      allow(controller).to receive(:current_user).and_return(user)
+      creature
+    end
+
+    it "shows all the creatures in the encounter" do
+      subject
+      expect(assigns(:encounter).creatures).to match_array(creature)
+    end
   end
 
   describe "POST #create" do

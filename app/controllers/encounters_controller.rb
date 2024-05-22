@@ -2,8 +2,9 @@ class EncountersController < ApplicationController
   def index
     @encounter = current_user.games.find(params[:game_id]).encounters.all
   end
-  
+
   def show
+    @encounter = current_user.games.find(params[:game_id]).encounters.find(params[:id])
   end
 
   def create
