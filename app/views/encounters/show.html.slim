@@ -1,9 +1,23 @@
 .display-2.col-12.text-center Encounters
-dialog#newgame.border-0
-  h1 New Creature
-  = render 'creatures/new_form'
+dialog#newcreature.border-0
+  h3 New Creature
+  .d-flex.col-12.justify-content-center.gap-2
+    button.btn.btn-light.col-6.border.border-dark onclick="premade.showModal(), newcreature.close()"
+      h2 Premade
+      p Premade monsters from the D&D 5e SRD
+    button.btn.btn-light.col-6.border.border-dark  onclick="custom.showModal(), newcreature.close()"
+      h2 Custom
+      p Make your own monsters, npc or players
 
-button.btn.btn-light onclick="newgame.showModal()" Add a creature
+dialog#premade.border-0
+  h3 Add Premade monster
+  = render "creatures/premade_creature"
+
+dialog#custom.border-0
+  h3 New Creature
+  = render "creatures/new_form"
+
+button.btn.btn-light onclick="newcreature.showModal()" Add a creature
 
 .col-12.d-flex.flex-row.justify-content-center.gap-2
   - @encounter.creatures.order(:initiative).each do |creature|
