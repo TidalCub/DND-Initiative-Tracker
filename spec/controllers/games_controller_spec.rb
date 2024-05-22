@@ -2,7 +2,19 @@ require "rails_helper"
 
 RSpec.describe GamesController, type: :controller do
   describe "GET #index" do
+    subject { get :index, params: { user_id: user.id } }
+    let(:user) { create(:user)}
+    let(:game) { create(:game, user: user) }
 
+    before do
+      allow(controller).to receive(:current_user).and_return(user)
+      game
+    end
+
+    it "assigns @games" do
+      subject
+      expect(assigns(:games)).to match_array(game)
+    end
   end
 
   describe "GET #show" do
