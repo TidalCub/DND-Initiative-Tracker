@@ -10,6 +10,8 @@ gem "sprockets-rails"
 gem "slim"
 gem 'sass-rails'
 
+gem 'bootstrap', '~> 5.3.3'
+
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 1.4"
 
