@@ -1,6 +1,8 @@
 class EncountersController < ApplicationController
   def index
+    @encounter = current_user.games.find(params[:game_id]).encounters.all
   end
+  
   def show
   end
 

@@ -1,6 +1,38 @@
 require "rails_helper"
 
 RSpec.describe EncountersController, type: :controller do
+  describe "GET #index" do
+    subject { get :index, params: {user_id: user.id, game_id: game.id} }
+      let(:user) { create(:user)}
+      let(:game) { create(:game, user: user) }
+      
+
+    before do
+      allow(controller).to receive(:current_user).and_return(user)
+    end
+
+    context "when there is an encounter in the game" do
+      let(:encounter) { create(:encounter, game: game) }
+      before do 
+        encounter
+      end
+
+      it "assigns @encounters" do
+        subject
+        expect(assigns(:encounter)).to match_array(encounter)
+      end
+    end
+
+    context "when there is not an encounter in the game" do
+      it "assigns @encounters" do
+        subject
+        expect(assigns(:encounter)).to eq([])
+      end
+    end
+
+    
+  end
+
   describe "POST #create" do
     subject { post :create, params: {user_id: user.id, game_id: game.id, encounter: {name: "encounter1"} } }
     let(:user) { create(:user)}
