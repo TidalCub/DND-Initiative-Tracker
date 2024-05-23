@@ -1,15 +1,64 @@
-= form_with model: @new_creature, action: "create", url: user_game_encounter_creatures_url(current_user, @encounter.game, @encounter) do |f|
+= form_for @new_creature, url: user_game_encounter_creatures_url(current_user, @encounter.game, @encounter), class: "form" do |f|
   .form-group
     = f.label :name
     = f.text_field :name, class: "form-control"
-  .form-group
-    = f.label :health
-    = f.number_field :health, class: "form-control"
-  .form-group
-    = f.label :armor_class
-    = f.number_field :armor_class, class: "form-control"
-  .form-group
-    =f.label :initiative
-    =f.number_field :initiative, class: "form-control"
-  
-  = f.submit "Create", class: "btn btn-primary"
+    hr
+    .d-flex
+      .col-12.d-flex.gap-2
+        .col-6.border-end.border-dark.pe-2
+          .form-inline.d-flex.gap-1
+            .form-group
+              = f.label :health, class: "col-12 text-center"
+              = f.number_field :health, class: "form-control"
+            .form-group
+              = f.label :armor_class, class: "col-12 text-center"
+              = f.number_field :armor_class, class: "form-control"
+            .form-group
+              = f.label :initiative, class: "col-12 text-center"
+              = f.number_field :initiative, class: "form-control"
+        .col-6
+          .form-inline.d-flex.gap-1
+            .form-group
+              = f.label :strength, "STR", class: "col-12 text-center"
+              = f.number_field :strength, class: "form-control"
+            .form-group
+              = f.label :dexterity, "DEX", class: "col-12 text-center"
+              = f.number_field :dexterity, class: "form-control"
+            .form-group
+              = f.label :constitution, "CON", class: "col-12 text-center"
+              = f.number_field :constitution, class: "form-control"
+            .form-group
+              = f.label :intelligence, "INT", class: "col-12 text-center"
+              = f.number_field :intelligence, class: "form-control"
+            .form-group
+              = f.label :wisdom, "WIS", class: "col-12 text-center"
+              = f.number_field :wisdom, class: "form-control"
+            .form-group
+              = f.label :charisma, "CHA", class: "col-12 text-center"
+              = f.number_field :charisma, class: "form-control"
+    hr
+    .col-12
+      h4.text-center.text-muted Optinal Stats
+    .col-12.d-flex.gap-2
+      .col-6.border-end.border-dark.pe-2
+        .form-group
+          = f.label :size
+          = f.text_field :size, class: "form-control"
+        .form-group
+          = f.label :monster_type
+          = f.text_field :monster_type, class: "form-control"
+        .form-group
+          = f.label :alignment
+          = f.text_field :alignment, class: "form-control"
+      .col-6
+        .form-group
+          = f.label :walking_speed
+          = f.number_field :walking_speed, class: "form-control"
+        .form-group
+          = f.label :fly_speed
+          = f.number_field :fly_speed, class: "form-control"
+        .form-group
+          = f.label :swim_speed
+          = f.number_field :swim_speed, class: "form-control"
+    hr
+    = f.submit "Add Creature", class: "btn btn-primary"
