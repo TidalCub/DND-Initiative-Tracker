@@ -10,6 +10,10 @@ RSpec.describe CreaturesController, type: :controller do
 
     let(:creature) { { name: "Goblin", health: 10, armor_class: 15, initiative: 10 } }
 
+    before do
+      allow(controller).to receive(:current_user).and_return(user)
+    end
+
     it "creates a new creature" do
       expect { subject }.to change(Creature, :count).by(1)
     end
