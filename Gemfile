@@ -82,3 +82,4 @@ gem "devise", "~> 4.9"
 gem 'faker'
 gem 'simplecov', require: false, group: :test
 gem 'dotenv', groups: [:development, :test]
+gem 'pg'
