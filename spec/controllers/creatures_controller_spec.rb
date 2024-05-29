@@ -52,4 +52,22 @@ RSpec.describe CreaturesController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    let(:user) { create(:user) }
+    let(:game) { create(:game, user: user) }
+    let(:encounter) { create(:encounter, game: game) }
+    let(:creature) { create(:creature, encounter: encounter) }
+
+    subject { delete :destroy, params: { user_id: user.id, game_id: game.id, encounter_id: encounter.id, id: creature.id } }
+
+    before do
+      creature
+      allow(controller).to receive(:current_user).and_return(user)
+    end
+    
+    it "deletes the creature" do
+      expect { subject }.to change(Creature, :count).by(-1)
+    end
+  end
 end
