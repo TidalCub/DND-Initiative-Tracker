@@ -14,6 +14,7 @@ html
     h1.text-light Initiative Tracker
     .d-flex.flex-column.justify-content-end
       .mb-2
-        = link_to user_games_path(current_user), class: "align-bottom text-light text-decoration-none" do
-          | Games
+        - if current_user
+          = link_to user_games_path(current_user), class: "align-bottom text-light text-decoration-none" do
+            | Games
   = yield
