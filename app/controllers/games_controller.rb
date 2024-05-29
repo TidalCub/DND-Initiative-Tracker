@@ -20,7 +20,7 @@ class GamesController < ApplicationController
       redirect_to user_game_url(current_user, game)
     else
       flash[:alert] = "Game could not be created"
-      render :new
+      redirect_to root_path
     end
 
   end

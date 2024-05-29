@@ -25,7 +25,6 @@ RSpec.describe GamesController, type: :controller do
         expect(response).to redirect_to(new_user_session_path)
       end
     end
-    
   end
 
   describe "GET #show" do
@@ -59,6 +58,20 @@ RSpec.describe GamesController, type: :controller do
       it "redirects to the game show page" do
         subject
         expect(response).to redirect_to(user_game_url(user, Game.first))
+      end
+    end
+    context "when the game is invalid" do
+      let(:user) { create(:user)}
+      let(:game) { build(:game, user: user) }
+
+      before do
+        allow(Game).to receive(:new).and_return(game)
+        allow(game).to receive(:save).and_return(false)
+      end
+
+      it "shows a flash message" do
+        subject
+        expect(flash[:alert]).to eq("Game could not be created")
       end
     end
   end
