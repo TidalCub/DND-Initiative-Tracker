@@ -27,6 +27,7 @@ class CreaturesController < ApplicationController
       redirect_to user_game_encounter_url(current_user, params[:game_id], params[:encounter_id])
     end
   end
+  
   private 
 
   def initiative

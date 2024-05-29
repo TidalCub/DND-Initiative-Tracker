@@ -3,14 +3,13 @@ Rails.application.routes.draw do
   resources :users do
     resources :games do
       resources :encounters do
-        resources :creatures do
-          member do
-            post :premade_create
-          end
-        end
+        resources :creatures
+        post :premade_create, to: "creatures#premade_create" 
       end
     end
   end
+
+  
 
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

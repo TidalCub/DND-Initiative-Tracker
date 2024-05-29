@@ -55,6 +55,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem "vcr"
 end
 
 group :development do
@@ -74,8 +75,10 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "webmock"
 end
 
 gem "devise", "~> 4.9"
 gem 'faker'
 gem 'simplecov', require: false, group: :test
+gem 'dotenv', groups: [:development, :test]
