@@ -18,27 +18,24 @@ dialog#custom.border-0.col-sm-10.col-md-6.col-lg-6.mw-90
   = render "creatures/new_form"
 
 button.btn.btn-light onclick="newcreature.showModal()" Add a creature
-
 .col-12.d-flex.flex-row.justify-content-center.gap-2
-  - @encounter.creatures.order(:order).each do |creature|
-    .bg-light.p-3.rounded.w-25
+  - @encounter.creatures.order(:position).each do |creature|
+    .bg-light.p-3.rounded.w-25 class="#{'border border-primary' if creature.current_turn?}"
       .col-12.d-flex.justify-content-between
         h1 = creature.name
         = button_to user_game_encounter_creature_url(current_user, @encounter.game, @encounter, creature), method: :delete, class: "dropdown-item"
           i.fa-solid.fa-xmark
-
       table.text-center.col-12
         tr
           th HP
           th AC
           th Init
-          th Order
         tr
           td = creature.health 
           td = creature.armor_class
           td = creature.initiative
 
 .col-12.d-flex.justify-content-between 
-  = button_to user_game_encounter_path(user_id: current_user, game_id: @encounter.game, id: @encounter, params: { action: "Next"}), method: :PATCH, class: "btn btn-danger"
+  = button_to user_game_encounter_path(user_id: current_user, game_id: @encounter.game, id: @encounter, encounter: { action: "next" }), method: :patch, class: "btn btn-danger" do
     | End Turn
 hr

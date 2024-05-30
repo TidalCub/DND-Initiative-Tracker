@@ -21,12 +21,13 @@ class EncountersController < ApplicationController
   def update
     @encounter = current_user.games.find(params[:game_id]).encounters.find(params[:id])
     if params[:encounter][:action] == "next"
-      @encounter.current_turn += 1
+      @encounter.current_turn = @encounter.current_turn.to_i + 1
       if @encounter.current_turn > @encounter.creatures.count
         @encounter.current_turn = 1
       end
     end
     @encounter.save
+    redirect_to user_game_encounter_url(current_user, params[:game_id], @encounter)
   end
 
   private
