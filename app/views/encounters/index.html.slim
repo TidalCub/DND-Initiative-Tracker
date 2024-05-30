@@ -3,11 +3,9 @@ dialog#newgame.border-0
   h1 New Encounters
   = render 'new_form'
 
-button.btn.btn-light onclick="newgame.showModal()" Create a new encounter
+button.btn.col-12.p-3.rounded  onclick="newgame.showModal()"
+  h3.fancy.text-center Create a new encounter
 
-.col-12.d-flex.flex-column
+.col-12.d-flex.flex-row.justify-content-center
   - @encounter.each do |encounter|
-    .col-12.p-2
-      = link_to user_game_encounter_url(current_user, @game, encounter)
-        .col-12.bg-light.p-3.rounded.mt-auto
-          h2.fancy = encounter.name
+    = render "shared/partials/card", title: encounter.name, link: user_game_encounter_url(current_user, @game, encounter)
