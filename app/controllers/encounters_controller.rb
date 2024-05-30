@@ -18,6 +18,14 @@ class EncountersController < ApplicationController
     end
   end
 
+  def update
+    @encounter = current_user.games.find(params[:game_id]).encounters.find(params[:id])
+    if params[:encounter][:action] == "next"
+      @encounter.current_turn += 1
+    end
+    @encounter.save
+  end
+
   private
 
   def create_params
