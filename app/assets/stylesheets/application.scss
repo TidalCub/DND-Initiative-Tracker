@@ -10,3 +10,21 @@ $fancy-font: ALMENDRA;
 .fancy{
   font-family: $fancy-font
 }
+
+body{
+  background-image: url("parchment-paper-texture.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.current_turn{
+    background-color: $gray-400;
+    @extend .bg-gradient;
+    min-width: 200px;
+}
+
+.not_current_turn{
+  background-color: $light;
+  min-width: 200px;
+}
