@@ -11,8 +11,8 @@ class CreaturesController < ApplicationController
   end
 
   def premade_create
-    monster = MonsterService.fetch_monsters(params[:monster][:id])
-    @creature = Creature.new(creature_params(monster))
+    debugger
+    @creature = Creature.new(PremadeMonster.find(params[:monster][:id]).attributes.except("id").merge(initiative: initiative))
     @creature.encounter = Encounter.find(params[:encounter_id])
     if @creature.save
       redirect_to user_game_encounter_url(current_user, params[:game_id], params[:encounter_id])
