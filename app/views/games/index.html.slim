@@ -3,11 +3,10 @@ dialog#newgame.border-0
   h1 New game
   = render 'new_form'
 
-button.btn.btn-light onclick="newgame.showModal()" Create a new Game\
+button.btn.col-12.p-3.rounded onclick="newgame.showModal()" class="text-decoration-none text-body" 
+  h3.fancy.text-center  Create a new game
 
-.col-12.d-flex.flex-column
+.col-12.d-flex.flex-row.justify-content-center
   - @games.each do |game|
-    .col-12.p-2
-      = link_to user_game_encounters_url(current_user, game)
-        .col-12.bg-light.p-3.rounded.mt-auto
-          h2.fancy = game.name
+    = render "shared/partials/card", title: game.name, link: user_game_encounters_url(current_user, game)
+    
