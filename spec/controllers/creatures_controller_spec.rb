@@ -27,6 +27,11 @@ RSpec.describe CreaturesController, type: :controller do
       subject
       expect(Creature.last).to have_attributes(creature)
     end
+
+    it "has an order" do
+      subject
+      expect(Creature.last.position).to eq(1)
+    end
   end
 
   describe "POST #premade_create" do
