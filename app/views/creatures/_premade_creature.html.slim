@@ -1,4 +1,4 @@
-= form_tag premade_create_user_game_encounter_creature_path(current_user, @encounter.game, @encounter) do
+= form_tag user_game_encounter_premade_create_path(current_user, @encounter.game, @encounter) do
   = select :monster, :id, MonsterService.fetch_all_monsters.map { |monster| [monster["name"], monster["index"]] }
   = submit_tag "Add", class: "btn btn-primary"
   p.text-muted This data is from <a href="https://www.dnd5eapi.co">D&D 5e API</a>
