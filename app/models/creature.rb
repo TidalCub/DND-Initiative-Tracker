@@ -3,9 +3,7 @@ class Creature < ApplicationRecord
   after_create :order
 
   def order
-    self.encounter.creatures.order(initiative: :desc ).each_with_index do |creature, index|
-      creature.update(position: index + 1)
-    end
+    encounter.re_order
   end
 
   def current_turn?
