@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_131645) do
     t.integer "walking_speed"
     t.integer "fly_speed"
     t.integer "swim_speed"
-    t.integer "order"
+    t.integer "position"
     t.index ["encounter_id"], name: "index_creatures_on_encounter_id"
   end
 
