@@ -57,7 +57,7 @@ RSpec.describe GamesController, type: :controller do
 
       it "redirects to the game show page" do
         subject
-        expect(response).to redirect_to(user_game_url(user, Game.first))
+        expect(response).to redirect_to(user_game_encounters_url(user, Game.first))
       end
     end
     context "when the game is invalid" do
