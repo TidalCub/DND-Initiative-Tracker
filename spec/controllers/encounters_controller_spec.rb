@@ -83,6 +83,7 @@ RSpec.describe EncountersController, type: :controller do
     subject { patch :update, params: {user_id: user.id, game_id: game.id, id: encounter.id, encounter: {action: "next"} } }
 
     before do
+      creature
       allow(controller).to receive(:current_user).and_return(user)
     end
 
@@ -90,6 +91,12 @@ RSpec.describe EncountersController, type: :controller do
       it "changes the current turn" do
         subject
         expect(Encounter.last.current_turn).to eq(2)
+      end
+
+      it "resets the current turn if it is greater than the number of creatures" do
+        encounter.update(current_turn: 3)
+        subject
+        expect(Encounter.last.current_turn).to eq(1)
       end
     end
   end
