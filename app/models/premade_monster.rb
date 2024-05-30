@@ -1,0 +1,2 @@
+class PremadeMonster < ApplicationRecord
+end

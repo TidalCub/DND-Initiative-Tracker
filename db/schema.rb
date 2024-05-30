@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_23_131645) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_30_200508) do
   create_table "creatures", force: :cascade do |t|
     t.string "name"
     t.integer "health"
@@ -50,6 +50,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_131645) do
     t.string "name"
     t.integer "user_id"
     t.index ["user_id"], name: "index_games_on_user_id"
+  end
+
+  create_table "premade_monsters", force: :cascade do |t|
+    t.string "name"
+    t.integer "health"
+    t.integer "armor_class"
+    t.integer "strength"
+    t.integer "dexterity"
+    t.integer "constitution"
+    t.integer "intelligence"
+    t.integer "wisdom"
+    t.integer "charisma"
+    t.string "size"
+    t.string "monster_type"
+    t.string "alignment"
+    t.integer "walking_speed"
+    t.integer "fly_speed"
+    t.integer "swim_speed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
