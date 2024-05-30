@@ -4,3 +4,4 @@ namespace :import do
     ImportMonsterService.import
   end
 end
+#run via rake import:monsters

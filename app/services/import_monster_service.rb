@@ -1,11 +1,12 @@
 class ImportMonsterService
   def self.import
-    MonsterService.fetch_all_monsters.each do |monster|
+    monsters = MonsterService.fetch_all_monsters.map do |monster|
       monster = MonsterService.fetch_monsters(monster["index"])
-      PremadeMonster.new(
+      {
+        index: monster["index"],
         name: monster["name"],
         health: monster["hit_points"],
-        armor_class: monster["armor_class"],
+        armor_class: monster["armor_class"].first["value"],
         strength: monster["strength"],
         dexterity: monster["dexterity"],
         constitution: monster["constitution"],
@@ -18,7 +19,9 @@ class ImportMonsterService
         walking_speed: monster["speed"]["walk"],
         fly_speed: monster["speed"]["fly"],
         swim_speed: monster["speed"]["swim"]
-      ).save
+      }
     end
+
+    PremadeMonster.upsert_all(monsters, unique_by: :index)
   end
 end
