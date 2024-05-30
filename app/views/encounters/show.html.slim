@@ -14,4 +14,11 @@ script
   |function openPartialView(url) {
   |  window.open(url, 'partialView', 'width=600,height=400,toolbar=no,menubar=no,scrollbars=yes,resizable=yes,location=no,directories=no,status=no');
   | }
+dialog#custom.border-0.col-sm-10.col-md-6.col-lg-6.mw-90
+  h3 New Creature
+  = render "creatures/new_form"
+
+button.btn.btn-light onclick="newcreature.showModal()" Add a creature
+
+= render "creatures/all_creatures"
 hr

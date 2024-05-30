@@ -1,0 +1,20 @@
+.col-12.d-flex.flex-row.justify-content-center.gap-2
+  - @encounter.creatures.order(:position).each do |creature|
+    .bg-light.p-3.rounded.w-25 class="#{'border border-primary' if creature.current_turn?}"
+      .col-12.d-flex.justify-content-between
+        h1 = creature.name
+        = button_to user_game_encounter_creature_url(current_user, @encounter.game, @encounter, creature), method: :delete, class: "dropdown-item"
+          i.fa-solid.fa-xmark
+      table.text-center.col-12
+        tr
+          th HP
+          th AC
+          th Init
+        tr
+          td = creature.health 
+          td = creature.armor_class
+          td = creature.initiative
+
+.col-12.d-flex.justify-content-between 
+  = button_to user_game_encounter_path(user_id: current_user, game_id: @encounter.game, encounter_id: @encounter), method: :patch, data: { turbo_frame: "turns"}, class: "btn btn-danger" do
+    | End Turn
