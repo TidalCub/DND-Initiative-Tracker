@@ -21,10 +21,44 @@ body{
 .current_turn{
     background-color: $gray-400;
     @extend .bg-gradient;
-    min-width: 200px;
+    
+    
+}
+
+.creature{
+  @media (min-width: 768px) {
+    height: 20vh;
+    min-height: 200px;
+  }
 }
 
 .not_current_turn{
   background-color: $light;
   min-width: 200px;
+  min-height: 400px;
+}
+
+.verticaltext {
+  @media (min-width: 768px) {
+    /* Styles for screens larger than 1024px */
+    writing-mode: sideways-lr;
+    height: 20vh;
+  }
+  
+  
+}
+
+.turn_title {
+  padding: 0;
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  @media (max-width: 768px) {
+    writing-mode: sideways-lr;
+  }
+
+  @media (min-width: 1025px) {
+    /* Styles for screens larger than 1024px */
+    writing-mode: horizontal-tb;
+  }
 }

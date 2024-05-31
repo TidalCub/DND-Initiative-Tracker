@@ -18,25 +18,67 @@ dialog#custom.border-0.col-sm-10.col-md-6.col-lg-6.mw-90
   = render "creatures/new_form"
 
 
-.col-12.d-flex.flex-column.flex-lg-row.justify-content-center.gap-2.flex-wrap
-  - @encounter.creatures.order(:position).each do |creature|
-    .p-3.rounded.col-lg-3.col-md-12.col-sm-12 class="#{creature.current_turn? ? 'current_turn' : 'not_current_turn'}"
-      .col-12.d-flex.flex-wrap
-        .col-lg-11.col-md-6.col-6.d-flex.justify-content-between.order-lg-1.order-md-1.order-1
-          h1 = creature.name
-        .col-lg-1.order-lg-1.order-md-3.order-3
-          = button_to user_game_encounter_creature_url(current_user, @encounter.game, @encounter, creature), method: :delete, class: "dropdown-item"
-            i.fa-solid.fa-xmark
+.col-12.d-flex.justify-content-center.flex-wrap
+  .col-12.col-sm-12.col-md-4.col-lg-4.d-flex.flex-row.flex-md-column.flex-lg-column
+    .col-1.col-md-12.col-lg-12.d-flex.align-items-center.justify-content-center
+      h4.text-center.turn_title Past
+    .col-10.col-md-12.col-lg-12.d-flex.justify-content-end.gap-2.flex-column.flex-md-row.flex-lg-row.pe-md-2.pe-lg-2.pt-2
+      - @past_turns.each do |creature|
+        .bg-light.rounded.verticaltext.creature
+          .p-3.rounded
+            h4 = creature.name
+
+  .col-12.col-sm-12.col-md-4.col-lg-4.d-flex.flex-row.flex-md-column.flex-lg-column
+    .col-1.col-md-12.col-lg-12.d-flex.align-items-center.justify-content-center
+      h4.turn_title Current
+    .col-10.col-md-12.col-lg-12.pt-2
+      - @encounter.creatures.where(position: @encounter.current_turn).each do |creature|
+        .col-12.p-3.rounded.current_turn.creature.current_turn
+          .col-12.d-flex.flex-wrap
+            .col-11
+              h1 = creature.name
+            .col-1
+              = button_to user_game_encounter_creature_url(current_user, @encounter.game, @encounter, creature), method: :delete, class: "dropdown-item"
+                i.fa-solid.fa-xmark
+              
+            table.text-center.col-12 
+              tr
+                th HP
+                th AC
+                th Init
+              tr
+                td = creature.health 
+                td = creature.armor_class
+                td = creature.initiative
+
+  .col-12.col-sm-12.col-md-4.col-lg-4.d-flex.flex-row.flex-md-column.flex-lg-column
+    .col-1.col-md-12.col-lg-12.d-flex.align-items-center.justify-content-center
+      h4.text-center.turn_title Upcomming
+    .col-10.col-md-12.col-lg-12.d-flex.justify-content-start.gap-2.flex-column.flex-md-row.flex-lg-row.ps-md-2.ps-lg-2.pt-2
+      - @upcoming_turns.each do |creature|
+        .bg-light.rounded.verticaltext.creature
+          .p-3.rounded
+            h4 = creature.name
+
+  / .col-12.d-flex.flex-column.flex-lg-row.justify-content-center.gap-2.flex-wrap
+  / - @encounter.creatures.order(:position).each do |creature|
+  /   .p-3.rounded.col-lg-3.col-md-12.col-sm-12.current_turn class="#{creature.current_turn? ? 'current_turn' : 'not_current_turn'}"
+  /     .col-12.d-flex.flex-wrap
+  /       .col-lg-11.col-md-6.col-6.d-flex.justify-content-between.order-lg-1.order-md-1.order-1
+  /         h1 = creature.name
+  /       .col-lg-1.order-lg-1.order-md-3.order-3
+  /         = button_to user_game_encounter_creature_url(current_user, @encounter.game, @encounter, creature), method: :delete, class: "dropdown-item"
+  /           i.fa-solid.fa-xmark
           
-        table.text-center.col-lg-12.col-md-5.col-5.order-lg-3.order-md-2.order-2
-          tr
-            th HP
-            th AC
-            th Init
-          tr
-            td = creature.health 
-            td = creature.armor_class
-            td = creature.initiative
+  /       table.text-center.col-lg-12.col-md-5.col-5.order-lg-3.order-md-2.order-2
+  /         tr
+  /           th HP
+  /           th AC
+  /           th Init
+  /         tr
+  /           td = creature.health 
+  /           td = creature.armor_class
+  /           td = creature.initiative
 
 .col-12.d-flex.justify-content-around.mt-2
   = button_to user_game_encounter_path(user_id: current_user, game_id: @encounter.game, id: @encounter, encounter: { action: "next" }), method: :patch, class: "btn btn-danger" do
