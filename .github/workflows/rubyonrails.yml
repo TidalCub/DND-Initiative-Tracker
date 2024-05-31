@@ -43,13 +43,9 @@ jobs:
       - name: Run tests
         run: bundle exec rspec
 
-      - name: Ensure minimum test coverage
-        run: |
-          coverage=$(grep -Po '(?<=lines\.\scoverage:\s)\d+\.\d+' coverage/.last_run.json)
-          if (( $(echo "$coverage < 95" | bc -l) )); then
-            echo "Test coverage ($coverage%) is below the minimum required (95%)."
-            exit 1
-          fi
+      - uses: joshmfrankel/simplecov-check-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   lint:
     runs-on: ubuntu-latest
