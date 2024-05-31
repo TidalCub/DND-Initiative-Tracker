@@ -1,0 +1,26 @@
+.col-12.d-flex.justify-content-center 
+  .col-11.col-md-8.col-lg-4.bg-dark.p-3.rounded.shadow.mt-3.text-white
+    h2 Sign up
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = render "devise/shared/error_messages", resource: resource
+
+      .field.form-group.pt-2
+      = f.label :email
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+
+      .field.form-group.pt-2
+      = f.label :password
+      - if @minimum_password_length
+        em= "(#{@minimum_password_length} characters minimum)"
+      = f.password_field :password, autocomplete: "new-password", class: "form-control"
+
+      .field.form-group.pt-2
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+
+      .actions.pt-3
+      = f.submit "Sign up", class: "btn btn-primary btn-primary col-12"
+
+      p
+        | Already have an account? 
+        = link_to "Log in", new_session_path(resource_name), class: "inline-link"

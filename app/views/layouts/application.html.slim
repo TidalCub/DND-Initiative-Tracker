@@ -17,6 +17,10 @@ html
         - if current_user
           = link_to user_games_path(current_user), class: "align-bottom text-light text-decoration-none" do
             | Games
-  - flash.each do |key, value|
-    .alert.alert-#{key} = value
+
+  - if flash[:alert]
+    .alert.bg-danger.text-center = flash[:alert]
+  - if flash[:notice]
+    .alert.bg-success.text-cente = flash[:notice]
+    
   = yield
