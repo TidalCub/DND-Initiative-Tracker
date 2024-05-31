@@ -41,7 +41,7 @@ jobs:
         run: bin/rails assets:precompile RAILS_ENV=test
 
       - name: Run tests
-        run: bundle excec rspec
+        run: bundle exec rspec
 
       - name: Ensure minimum test coverage
         run: |
