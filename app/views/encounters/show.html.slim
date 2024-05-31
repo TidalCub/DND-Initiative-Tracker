@@ -24,9 +24,15 @@ dialog#custom.border-0.col-sm-10.col-md-6.col-lg-6.mw-90
       h4.text-center.turn_title Past
     .col-10.col-md-12.col-lg-12.d-flex.justify-content-end.gap-2.flex-column.flex-md-row.flex-lg-row.pe-md-2.pe-lg-2.pt-2
       - @past_turns.each do |creature|
-        .bg-light.rounded.verticaltext.creature
-          .p-3.rounded
-            h4 = creature.name
+        .bg-light.rounded.creature.verticaltext
+          h4.creature_name.p-3 = creature.name
+          .creature_health.col-12.h-100
+            button.btn.btn-success.btn-sm.h-50
+              | +1
+            button.btn.btn-danger.btn-sm.h-50
+              | -1
+
+          
 
   .col-12.col-sm-12.col-md-4.col-lg-4.d-flex.flex-row.flex-md-column.flex-lg-column
     .col-1.col-md-12.col-lg-12.d-flex.align-items-center.justify-content-center
@@ -56,9 +62,13 @@ dialog#custom.border-0.col-sm-10.col-md-6.col-lg-6.mw-90
       h4.text-center.turn_title Upcomming
     .col-10.col-md-12.col-lg-12.d-flex.justify-content-start.gap-2.flex-column.flex-md-row.flex-lg-row.ps-md-2.ps-lg-2.pt-2
       - @upcoming_turns.each do |creature|
-        .bg-light.rounded.verticaltext.creature
-          .p-3.rounded
-            h4 = creature.name
+        .bg-light.rounded.creature.verticaltext
+          h4.creature_name.p-3 = creature.name
+          .creature_health.col-12.h-100
+            button.btn.btn-success.btn-sm.h-50
+              | +1
+            button.btn.btn-danger.btn-sm.h-50
+              | -1
 
   / .col-12.d-flex.flex-column.flex-lg-row.justify-content-center.gap-2.flex-wrap
   / - @encounter.creatures.order(:position).each do |creature|

@@ -26,11 +26,26 @@ body{
 }
 
 .creature{
+  transition: all 0.3s;
   @media (min-width: 768px) {
     height: 20vh;
     min-height: 200px;
   }
 }
+
+.creature:hover{
+  .creature_health{
+    display: block;
+    width: 100%;
+  }
+}
+
+.creature_health{
+  display: none;
+  width: 0px;
+  transition: all 0.3s;
+}
+
 
 .not_current_turn{
   background-color: $light;
@@ -45,14 +60,9 @@ body{
     height: 20vh;
   }
   
-  
 }
 
 .turn_title {
-  padding: 0;
-  margin: 0;
-  margin-top: 0;
-  margin-bottom: 0;
   @media (max-width: 768px) {
     writing-mode: sideways-lr;
   }
@@ -61,4 +71,12 @@ body{
     /* Styles for screens larger than 1024px */
     writing-mode: horizontal-tb;
   }
+}
+
+.turn_title{
+  margin: 0 !important;
+}
+
+.creature_name{
+  margin: 0 !important;
 }
