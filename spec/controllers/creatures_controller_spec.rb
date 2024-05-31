@@ -38,23 +38,20 @@ RSpec.describe CreaturesController, type: :controller do
     let(:user) { create(:user) }
     let(:game) { create(:game, user: user) }
     let (:encounter) { create(:encounter, game: game) }
-
+    let(:monster) { create(:premade_monster) }
+    
     before do
       allow(controller).to receive(:current_user).and_return(user)
     end
-    subject { post :premade_create, params: { user_id: user.id, game_id: game.id, encounter_id: encounter.id, monster: { id: "adult-black-dragon" } } }
+    subject { post :premade_create, params: { user_id: user.id, game_id: game.id, encounter_id: encounter.id, monster: { id: monster.id } } }
 
     it "creates a new creature" do
-      VCR.use_cassette("adult-black-dragon") do
-        expect { subject }.to change(Creature, :count).by(1)
-      end
+      expect { subject }.to change(Creature, :count).by(1)
     end
 
     it "gets the details" do
-      VCR.use_cassette("adult-black-dragon") do
-        subject
-        expect(Creature.last).to have_attributes(name: "Adult Black Dragon", health: 195, armor_class: 19)
-      end
+      subject
+      expect(Creature.last).to have_attributes(name: "Adult Black Dragon", health: 195, armor_class: 19)
     end
   end
 

@@ -13,6 +13,7 @@ RSpec.describe Creature, type: :model do
       expect(creature1.reload.position).to eq(2)
     end
   end
+  
   describe "#current_turn?" do
     let(:user) { create(:user) }
     let(:game) { create(:game, user: user) }
