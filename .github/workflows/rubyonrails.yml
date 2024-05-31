@@ -26,6 +26,14 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Install dependencies
+        run: |
+          gem install bundler -v 2.4.13
+          bundle install
+      - name: Generate RSpec binstub
+        run: |
+          bundle exec rails generate rspec:install
+          bundle binstub rspec-core
       - name: Set up database schema
         run: bin/rails db:schema:load
       - name: Run tests
@@ -46,10 +54,13 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Install dependencies
+        run: |
+          gem install bundler -v 2.4.13
+          bundle install
       - name: Security audit dependencies
         run: bin/bundler-audit --update
       - name: Security audit application code
         run: bin/brakeman -q -w2
       - name: Lint Ruby files
         run: bin/rubocop --parallel
-
