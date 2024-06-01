@@ -2,6 +2,7 @@ require 'net/http'
 require 'json'
 
 class CreaturesController < ApplicationController
+  before_action :authenticate_user!
 
   def index 
     @game = current_user.games.find(params[:game_id])
