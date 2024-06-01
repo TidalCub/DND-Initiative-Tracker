@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe CreaturesController, type: :controller do
+  
   describe "POST #create" do
     subject { post :create, params: { user_id: user.id, game_id: game.id, encounter_id: encounter.id, creature: } }
 
@@ -11,6 +12,7 @@ RSpec.describe CreaturesController, type: :controller do
     let(:creature) { { name: "Goblin", health: 10, armor_class: 15, initiative: 10 } }
 
     before do
+      sign_in user
       allow(controller).to receive(:current_user).and_return(user)
     end
 
@@ -41,6 +43,7 @@ RSpec.describe CreaturesController, type: :controller do
     let(:monster) { create(:premade_monster) }
     
     before do
+      sign_in user
       allow(controller).to receive(:current_user).and_return(user)
     end
     subject { post :premade_create, params: { user_id: user.id, game_id: game.id, encounter_id: encounter.id, monster: { id: monster.id } } }
@@ -64,6 +67,7 @@ RSpec.describe CreaturesController, type: :controller do
     subject { delete :destroy, params: { user_id: user.id, game_id: game.id, encounter_id: encounter.id, id: creature.id } }
 
     before do
+      sign_in user
       creature
       allow(controller).to receive(:current_user).and_return(user)
     end

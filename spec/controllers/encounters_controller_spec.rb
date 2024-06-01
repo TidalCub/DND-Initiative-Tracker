@@ -8,6 +8,7 @@ RSpec.describe EncountersController, type: :controller do
       
 
     before do
+      sign_in user
       allow(controller).to receive(:current_user).and_return(user)
     end
 
@@ -39,6 +40,7 @@ RSpec.describe EncountersController, type: :controller do
     let(:creature) { create_list(:creature, 2, encounter: encounter) }
 
     before do
+      sign_in user
       allow(controller).to receive(:current_user).and_return(user)
       creature
     end
@@ -55,6 +57,7 @@ RSpec.describe EncountersController, type: :controller do
     let(:game) { create(:game, user: user) }
 
     before do
+      sign_in user
       allow(controller).to receive(:current_user).and_return(user)
     end
     it "creates a new encounter" do
@@ -83,6 +86,7 @@ RSpec.describe EncountersController, type: :controller do
     subject { patch :update, params: {user_id: user.id, game_id: game.id, id: encounter.id, encounter: {action: "next"} } }
 
     before do
+      sign_in user
       creature
       allow(controller).to receive(:current_user).and_return(user)
     end
