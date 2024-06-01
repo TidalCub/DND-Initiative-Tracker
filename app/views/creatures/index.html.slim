@@ -1,0 +1,34 @@
+.col-12.d-flex.flex-column.gap-2.align-items-center.pt-2.pb-2
+  .col-11.d-flex.align-items-end.justify-content-between
+    = link_to user_game_encounter_url(current_user, @game, @encounter), class: "btn btn-danger shadow" do
+      | Start Encounter
+    button.btn.btn-light.shadow onclick="newcreature.showModal()" Add a creature
+    
+
+.col-12.d-flex.flex-column.gap-2.align-items-center
+  - @creatures.each do |creature|
+    .col-11.bg-light.rounded.p-2.d-flex.shadow
+      .col-11 
+        h2 = creature.name
+      .col-1.d-flex.flex-column.align-items-end.justify-content-center
+        = button_to user_game_encounter_creature_url(current_user, creature.encounter.game, creature.encounter, creature), method: :delete, class: "dropdown-item"
+                  i.fa-solid.fa-xmark
+
+
+dialog#newcreature.border-0
+  h3 New Creature
+  .d-flex.col-12.justify-content-center.gap-2
+    button.btn.btn-light.col-6.border.border-dark onclick="premade.showModal(), newcreature.close()"
+      h2 Premade
+      p Premade monsters from the D&D 5e SRD
+    button.btn.btn-light.col-6.border.border-dark  onclick="custom.showModal(), newcreature.close()"
+      h2 Custom
+      p Make your own monsters, npc or players
+
+dialog#premade.border-0
+  h3 Add Premade monster
+  = render "creatures/premade_creature"
+
+dialog#custom.border-0.col-sm-10.col-md-6.col-lg-6.mw-90
+  h3 New Creature
+  = render "creatures/new_form"

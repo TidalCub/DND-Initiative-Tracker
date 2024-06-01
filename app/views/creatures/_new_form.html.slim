@@ -1,4 +1,4 @@
-= form_for @new_creature, url: user_game_encounter_creatures_url(current_user, @encounter.game, @encounter), class: "form" do |f|
+= form_for @new_creature, url: user_game_encounter_creatures_url(current_user, @game, @encounter), class: "form" do |f|
   .form-group
     = f.label :name
     = f.text_field :name, class: "form-control"

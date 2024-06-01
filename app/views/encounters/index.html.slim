@@ -8,4 +8,4 @@ button.btn.col-12.p-3.rounded  onclick="newgame.showModal()"
 
 .col-12.d-flex.flex-row.justify-content-center
   - @encounter.each do |encounter|
-    = render "shared/partials/card", title: encounter.name, link: user_game_encounter_url(current_user, @game, encounter)
+    = render "shared/partials/card", title: encounter.name, link: user_game_encounter_creatures_url(current_user, @game, encounter)

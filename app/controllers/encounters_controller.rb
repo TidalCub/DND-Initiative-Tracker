@@ -38,16 +38,16 @@ class EncountersController < ApplicationController
   def previous_upcomming_turns(encounter)
     creatures = encounter.creatures.order(:position)
     index = creatures.index { |creature| creature.position == encounter.current_turn }
-  
-    past_turns = creatures[0...index]
-    upcoming_turns = creatures[index+1..-1]
-  
-    # Rotate arrays if necessary to ensure current creature is in the middle
-    while (upcoming_turns.size - past_turns.size).abs > 1
-      if upcoming_turns.size > past_turns.size
-        past_turns.unshift(upcoming_turns.pop)
-      elsif past_turns.size > upcoming_turns.size
-        upcoming_turns.push(past_turns.shift)
+    if creatures.count > 2
+      past_turns = creatures[0...index]
+      upcoming_turns = creatures[index+1..-1]
+    
+      while (upcoming_turns.size - past_turns.size).abs > 1
+        if upcoming_turns.size > past_turns.size
+          past_turns.unshift(upcoming_turns.pop)
+        elsif past_turns.size > upcoming_turns.size
+          upcoming_turns.push(past_turns.shift)
+        end
       end
     end
   

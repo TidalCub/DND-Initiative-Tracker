@@ -2,11 +2,20 @@ require 'net/http'
 require 'json'
 
 class CreaturesController < ApplicationController
+
+  def index 
+    @game = current_user.games.find(params[:game_id])
+    @encounter = @game.encounters.find(params[:encounter_id])
+    @creatures = @encounter.creatures
+    @new_creature = Creature.new
+    
+  end
+
   def create
     @creature = Creature.new(create_params)
     @creature.encounter = Encounter.find(params[:encounter_id])
     if @creature.save
-      redirect_to user_game_encounter_url(current_user, params[:game_id], params[:encounter_id])
+      redirect_to user_game_encounter_creatures_url(current_user, params[:game_id], params[:encounter_id])
     end
   end
 
@@ -14,14 +23,14 @@ class CreaturesController < ApplicationController
     @creature = Creature.new(PremadeMonster.find(params[:monster][:id]).attributes.except("id","index").merge(initiative: initiative))
     @creature.encounter = Encounter.find(params[:encounter_id])
     if @creature.save
-      redirect_to user_game_encounter_url(current_user, params[:game_id], params[:encounter_id])
+      redirect_to user_game_encounter_creatures_url(current_user, params[:game_id], params[:encounter_id])
     end
   end
 
   def destroy
     @creature = Creature.find(params[:id])
     if @creature.destroy
-      redirect_to user_game_encounter_url(current_user, params[:game_id], params[:encounter_id])
+      redirect_to user_game_encounter_creatures_url(current_user, params[:game_id], params[:encounter_id])
     end
   end
   
