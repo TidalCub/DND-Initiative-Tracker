@@ -33,7 +33,7 @@ jobs:
         run: gem install bundler
       
       - name: Change error_highlighter gem version
-        run: gem uninstall error_highligter -v 0.3.0 && gem install error_highlighter -v 0.6.0
+        run: gem uninstall error_highlight -v 0.3.0 && gem install error_highlight -v 0.6.0
 
       - name: Install dependencies
         run: bundle install
