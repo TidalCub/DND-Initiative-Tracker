@@ -9,7 +9,6 @@ class EncountersController < ApplicationController
 
   def show
     @encounter = current_user.games.find(params[:game_id]).encounters.find(params[:id])
-    @new_creature = Creature.new
     creaturs = previous_upcomming_turns(@encounter)
     @past_turns = creaturs[0]
     @upcoming_turns = creaturs[1]
@@ -32,7 +31,16 @@ class EncountersController < ApplicationController
       end
     end
     @encounter.save
-    redirect_to user_game_encounter_url(current_user, params[:game_id], @encounter)
+    redirect_back(fallback_location: root_path)
+
+  end
+
+  def minimal_turns
+    @encounter = current_user.games.find(params[:game_id]).encounters.find(params[:encounter_id])
+    creaturs = previous_upcomming_turns(@encounter)
+    @past_turns = creaturs[0]
+    @upcoming_turns = creaturs[1]
+    render layout: false
   end
 
   private

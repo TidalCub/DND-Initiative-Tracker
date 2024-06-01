@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :games do
       resources :encounters do
+        get :turns, to: "encounters#minimal_turns"
         resources :creatures
         post :premade_create, to: "creatures#premade_create" 
       end

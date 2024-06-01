@@ -5,7 +5,13 @@
       | Add / Remove Creatures
     = link_to user_games_path(current_user), class: "align-bottom text-light text-decoration-none" do
       | Share
+    = link_to "#", onclick: "openPartialView('#{user_game_encounter_turns_path(current_user, @encounter.game, @encounter)}')", class: "align-bottom text-light text-decoration-none" do
+      | Pop out
 
 = render "turns", locaals: { encounter: @encounter, past_turns: @past_turns, upcoming_turns: @upcoming_turns}
 
+script
+  |function openPartialView(url) {
+  |  window.open(url, 'partialView', 'width=600,height=400,toolbar=no,menubar=no,scrollbars=yes,resizable=yes,location=no,directories=no,status=no');
+  | }
 hr
