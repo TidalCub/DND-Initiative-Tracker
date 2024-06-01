@@ -13,7 +13,7 @@ html
   .col-12.bg-dark.p-3.d-flex.gap-4.align-bottom
     h1.text-light Initiative Tracker
     - if current_user
-      .d-flex.flex-column.justify-content-end
+      .flex-column.justify-content-end.nav_link
         .mb-2
           .link_dropdown.text-white role="button"
             | Your Games
@@ -23,7 +23,7 @@ html
               <hr class="dropdown-divider text-dark border-1">
               - current_user.games.limit(5).each do |game|
                 = link_to game.name, user_game_encounters_path(current_user, game), class: "dropdown-item text-decoration-none text-dark m-2"
-      .d-flex.flex-column.justify-content-end
+      .flex-column.justify-content-end.nav_link
         .mb-2
           .link_dropdown.text-white role="button"
             | Your Encounters

@@ -1,73 +1,11 @@
 .col-12.bg-secondary.p-1.d-flex.align-bottom.justify-content-between
-  h3.text-white.ps-3.pt-1.col-4 = @encounter.name
-  .mb-1.d-flex.gap-3.align-items-end.pe-4
+  h3.text-white.ps-3.pt-1.col-12.col-md-4.col-lg-4 = @encounter.name
+  .mb-1.gap-3.align-items-end.pe-4.nav_link
     = link_to user_game_encounter_creatures_path(current_user, @encounter.game, @encounter), class: "align-bottom text-light text-decoration-none" do
       | Add / Remove Creatures
     = link_to user_games_path(current_user), class: "align-bottom text-light text-decoration-none" do
       | Share
 
-- if @past_turns.present? && @upcoming_turns.present?
-  .col-12.d-flex.justify-content-center.flex-wrap
-    .col-12.col-sm-12.col-md-4.col-lg-4.d-flex.flex-row.flex-md-column.flex-lg-column
-      .col-1.col-md-12.col-lg-12.d-flex.align-items-center.justify-content-center
-        h4.text-center.turn_title Past
-      .col-10.col-md-12.col-lg-12.d-flex.justify-content-end.gap-2.flex-column.flex-md-row.flex-lg-row.pe-md-2.pe-lg-2.pt-2
-        - @past_turns.each do |creature|
-          .bg-light.rounded.creature.verticaltext
-            h4.creature_name.p-3 = creature.name
-            .creature_health.col-12.h-100.p-2
-              button.btn.btn-success.btn-sm.health_buttons
-                | +1
-              button.btn.btn-danger.btn-sm.health_buttons
-                | -1
+= render "turns", locaals: { encounter: @encounter, past_turns: @past_turns, upcoming_turns: @upcoming_turns}
 
-    .col-12.col-sm-12.col-md-4.col-lg-4.d-flex.flex-row.flex-md-column.flex-lg-column
-      .col-1.col-md-12.col-lg-12.d-flex.align-items-center.justify-content-center
-        h4.turn_title Current
-      .col-10.col-md-12.col-lg-12.pt-2
-        - @encounter.creatures.where(position: @encounter.current_turn).each do |creature|
-          .col-12.p-3.rounded.current_turn.creature.current_turn
-            .col-12.d-flex.flex-wrap
-              .col-11
-                h1 = creature.name
-              .col-1
-                = button_to user_game_encounter_creature_url(current_user, @encounter.game, @encounter, creature), method: :delete, class: "dropdown-item"
-                  i.fa-solid.fa-xmark
-                
-              table.text-center.col-12 
-                tr
-                  th HP
-                  th AC
-                  th Init
-                tr
-                  td = creature.health 
-                  td = creature.armor_class
-                  td = creature.initiative
-
-    .col-12.col-sm-12.col-md-4.col-lg-4.d-flex.flex-row.flex-md-column.flex-lg-column
-      .col-1.col-md-12.col-lg-12.d-flex.align-items-center.justify-content-center
-        h4.text-center.turn_title Upcomming
-      .col-10.col-md-12.col-lg-12.d-flex.justify-content-start.gap-2.flex-column.flex-md-row.flex-lg-row.ps-md-2.ps-lg-2.pt-2
-        - @upcoming_turns.each do |creature|
-          .bg-light.rounded.creature.verticaltext
-            h4.creature_name.p-3 = creature.name
-            .creature_health.col-12.h-100.p-2
-              button.btn.btn-success.btn-sm.health_buttons
-                | +1
-              button.btn.btn-danger.btn-sm.health_buttons
-                | -1
-  .col-12.d-flex.justify-content-around.mt-2
-    = button_to user_game_encounter_path(user_id: current_user, game_id: @encounter.game, id: @encounter, encounter: { action: "next" }), method: :patch, class: "btn btn-danger" do
-      | Previous Turn
-    
-    = button_to user_game_encounter_path(user_id: current_user, game_id: @encounter.game, id: @encounter, encounter: { action: "next" }), method: :patch, class: "btn btn-danger" do
-      | Next Turn
-- else
-  .col-12
-    h2.text-center You need three or more creatures to start the encounter
-    .col-12.text-center
-      | Click on the Add / Remove Creatures button to add creatures to the encounter or click here:
-      br
-      = link_to user_game_encounter_creatures_path(current_user, @encounter.game, @encounter) do
-        | Add / Remove Creatures
 hr

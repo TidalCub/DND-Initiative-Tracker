@@ -103,3 +103,13 @@ body{
     background-color: $light;
   }
 }
+
+.nav_link{
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  @media (min-width: 769px) {
+    display: flex;
+  }
+}
