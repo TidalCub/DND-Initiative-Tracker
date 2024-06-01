@@ -1,4 +1,11 @@
-.display-2.col-12.text-center Encounter
+.col-12.bg-secondary.p-1.d-flex.align-bottom.justify-content-between
+  h3.text-white.ps-3.pt-1.col-4 = @encounter.name
+  .mb-1.d-flex.gap-3.align-items-end.pe-4
+    = link_to user_game_encounter_creatures_path(current_user, @encounter.game, @encounter), class: "align-bottom text-light text-decoration-none" do
+      | Add / Remove Creatures
+    = link_to user_games_path(current_user), class: "align-bottom text-light text-decoration-none" do
+      | Share
+
 dialog#newcreature.border-0
   h3 New Creature
   .d-flex.col-12.justify-content-center.gap-2
