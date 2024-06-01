@@ -28,6 +28,12 @@ jobs:
         with:
           ruby-version: 3.1.1
           bundler-cache: true
+      
+      - name: update bundler
+        run: gem install bundler
+      
+      - name: Change error_highlighter gem version
+        run: gem uninstall error_highligter -v 0.3.0 && gem install error_highlighter -v 0.6.0
 
       - name: Install dependencies
         run: bundle install
