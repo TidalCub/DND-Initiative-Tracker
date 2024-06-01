@@ -91,3 +91,15 @@ body{
 .creature_name{
   margin: 0 !important;
 }
+
+.drop_down_menu{
+  display: none;
+}
+
+.link_dropdown:hover{
+  .drop_down_menu{
+    display: block;
+    position: absolute;
+    background-color: $light;
+  }
+}

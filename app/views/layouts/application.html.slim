@@ -12,11 +12,27 @@ html
   body
   .col-12.bg-dark.p-3.d-flex.gap-4.align-bottom
     h1.text-light Initiative Tracker
-    .d-flex.flex-column.justify-content-end
-      .mb-2
-        - if current_user
-          = link_to user_games_path(current_user), class: "align-bottom text-light text-decoration-none" do
-            | Games
+    - if current_user
+      .d-flex.flex-column.justify-content-end
+        .mb-2
+          .link_dropdown.text-white role="button"
+            | Your Games
+            .drop_down_menu.p-1
+              = link_to user_games_path(current_user), class: "dropdown-item text-decoration-none text-dark m-2" do
+                | All Games
+              <hr class="dropdown-divider text-dark border-1">
+              - current_user.games.limit(5).each do |game|
+                = link_to game.name, user_game_encounters_path(current_user, game), class: "dropdown-item text-decoration-none text-dark m-2"
+      .d-flex.flex-column.justify-content-end
+        .mb-2
+          .link_dropdown.text-white role="button"
+            | Your Encounters
+            .drop_down_menu.p-1
+              <hr class="dropdown-divider text-dark border-1">
+              - current_user.encounters.limit(5).each do |encounter|
+                = link_to encounter.name, user_game_encounter_path(current_user, encounter.game, encounter), class: "dropdown-item text-decoration-none text-dark m-2"
+
+          
 
   - if flash[:alert]
     .alert.bg-danger.text-center = flash[:alert]
