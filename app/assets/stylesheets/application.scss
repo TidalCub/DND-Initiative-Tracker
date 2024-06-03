@@ -67,7 +67,7 @@ body{
 .verticaltext {
   @media (min-width: 768px) {
     /* Styles for screens larger than 1024px */
-    writing-mode: sideways-lr;
+    writing-mode: vertical-lr;
     height: 20vh;
   }
   
@@ -75,7 +75,7 @@ body{
 
 .turn_title {
   @media (max-width: 768px) {
-    writing-mode: sideways-lr;
+    writing-mode: vertical-lr;
   }
 
   @media (min-width: 1025px) {
