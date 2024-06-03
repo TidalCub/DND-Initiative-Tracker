@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     resources :games do
       resources :encounters do
         get :turns, to: "encounters#minimal_turns"
-        resources :creatures
+        resources :creatures do
+          patch 'update_health', on: :member
+        end
         post :premade_create, to: "creatures#premade_create" 
       end
     end

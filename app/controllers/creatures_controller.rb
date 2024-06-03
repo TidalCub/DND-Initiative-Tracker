@@ -28,6 +28,18 @@ class CreaturesController < ApplicationController
     end
   end
 
+  def update_health
+    @creature = Creature.find(params[:id])
+    @creature.update(health: @creature.health + params[:amount].to_i)
+  
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace("creature_health_#{@creature.id}", partial: 'creatures/health', locals: { creature: @creature })
+      end
+      format.html { redirect_to user_game_encounter_path(current_user, @creature.encounter.game, @creature.encounter) }
+    end
+  end
+
   def destroy
     @creature = Creature.find(params[:id])
     if @creature.destroy

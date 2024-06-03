@@ -73,6 +73,14 @@ body{
   
 }
 
+.horinzontaltext{
+  @media (min-width: 1025px) {
+    /* Styles for screens larger than 1024px */
+    writing-mode: horizontal-tb;
+  }
+
+}
+
 .turn_title {
   @media (max-width: 768px) {
     writing-mode: vertical-lr;
