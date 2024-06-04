@@ -8,8 +8,24 @@
     = link_to "#", onclick: "openPartialView('#{user_game_encounter_turns_path(current_user, @encounter.game, @encounter)}')", class: "align-bottom text-light text-decoration-none" do
       | Pop out
 
-= render "turns", locals: { encounter: @encounter, past_turns: @past_turns, upcoming_turns: @upcoming_turns}
+- if @past_turns.present? && @upcoming_turns.present?
+  .col-12.d-flex.justify-content-center.flex-wrap
+    = render "encounters/turns", turns: @past_turns, title: "Past"
+    = render "encounters/current_turn", encounter: @encounter
+    = render "encounters/turns", turns: @upcoming_turns, title: "Upcoming"
 
+  .col-12.d-flex.justify-content-around.mt-2
+    = button_to user_game_encounter_path(user_id: current_user, game_id: @encounter.game, id: @encounter, encounter: { action: "next" }), method: :patch, remote: true, class: "btn btn-danger" do
+      | Next Turn
+
+- else
+  .col-12
+    h2.text-center You need three or more creatures to start the encounter
+    .col-12.text-center
+      | Click on the Add / Remove Creatures button to add creatures to the encounter or click here:
+      br
+      = link_to user_game_encounter_creatures_path(current_user, @encounter.game, @encounter) do
+        | Add / Remove Creatures
 script
   |function openPartialView(url) {
   |  window.open(url, 'partialView', 'width=600,height=400,toolbar=no,menubar=no,scrollbars=yes,resizable=yes,location=no,directories=no,status=no');

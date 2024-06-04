@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_30_204240) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_04_122534) do
   create_table "creatures", force: :cascade do |t|
     t.string "name"
     t.integer "health"
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_204240) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.integer "game_id"
-    t.integer "current_turn"
+    t.integer "current_turn", default: 1
     t.index ["game_id"], name: "index_encounters_on_game_id"
   end
 

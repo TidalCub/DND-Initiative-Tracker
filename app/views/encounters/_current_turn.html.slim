@@ -1,0 +1,22 @@
+.col-12.col-sm-12.col-md-4.col-lg-4.d-flex.flex-row.flex-md-column.flex-lg-column
+  .col-1.col-md-12.col-lg-12.d-flex.align-items-center.justify-content-center
+    h4.turn_title Current
+  .col-10.col-md-12.col-lg-12.pt-2
+    - @encounter.creatures.where(position: @encounter.current_turn).each do |creature|
+      .col-12.bg-light.p-3.rounded.current_turn.creature.current_turn
+        .col-12.d-flex.flex-wrap
+          .col-11
+            h1 = creature.name
+          .col-1
+            = button_to user_game_encounter_creature_url(current_user, @encounter.game, @encounter, creature), method: :delete, class: "dropdown-item"
+              i.fa-solid.fa-xmark
+            
+          table.text-center.col-12 
+            tr
+              th HP
+              th AC
+              th Init
+            tr
+              td = creature.health 
+              td = creature.armor_class
+              td = creature.initiative

@@ -19,7 +19,6 @@ body{
 }
 
 .current_turn{
-    background-color: $gray-400;
     @extend .bg-gradient;
     
     
@@ -120,4 +119,16 @@ body{
   @media (min-width: 769px) {
     display: flex;
   }
+}
+
+.past_turns{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 3px;
+}
+
+.upcoming_turns{
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 3px;
 }
